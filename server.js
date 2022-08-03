@@ -43,6 +43,12 @@ app.use(passport.initialize());
 
 //ʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌ
 
+
+app.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.send("Spotify server listening");
+});
+
+
 //User related methods
 app.post('/api/user/register', (req, res) => {
     userService.registerUser(req.body).then(msg => {
