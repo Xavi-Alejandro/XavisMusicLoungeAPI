@@ -34,6 +34,7 @@ module.exports.connect = function () {
 };
 
 module.exports.registerUser = function (userData) {
+    console.log("userData is: "+JSON.stringify(userData));
     return new Promise(function (resolve, reject) {
 
         if (userData.password != userData.password2) {
@@ -43,9 +44,8 @@ module.exports.registerUser = function (userData) {
             bcrypt.hash(userData.password, 10).then(hash => {
 
                 userData.password = hash;
-
+                
                 let newUser = new User(userData);
-
                 newUser.save(err => {
                     if (err) {
                         if (err.code == 11000) {

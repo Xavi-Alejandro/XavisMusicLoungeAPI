@@ -54,6 +54,8 @@ app.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 
 //User related methods
 app.post('/api/user/register', (req, res) => {
+    console.log("On register");
+    console.log("req.body: "+ JSON.stringify(req.body));
     userService.registerUser(req.body).then(msg => {
         res.status(201).json({ "message": msg });
     }).catch(msg => {
@@ -100,13 +102,6 @@ app.delete('/api/user/favourites/:id', passport.authenticate('jwt', { session: f
         res.json({ "error": msg });
     });
 });
-
-
-
-
-
-app.use(express.json());
-app.use(cors());
 
 /* TODO Add Your Routes Here */
 
