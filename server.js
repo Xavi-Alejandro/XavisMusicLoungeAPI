@@ -43,7 +43,7 @@ app.use(passport.initialize());
 
 //ʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌʌ
 
-
+//This is extra
 app.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.send("Spotify server listening");
 });
@@ -52,7 +52,7 @@ app.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 //User related methods
 app.post('/api/user/register', (req, res) => {
     userService.registerUser(req.body).then(msg => {
-        res.json({ "message": msg });
+        res.status(201).json({ "message": msg });
     }).catch(msg => {
         res.status(422).json({ "message": msg });
     });
