@@ -13,6 +13,9 @@ const app = express();
 
 const HTTP_PORT = process.env.PORT || 8080;
 
+app.use(express.json());
+app.use(cors());
+
 //vvvvvvvvvvvvvvvvvvvvvvvvvvv
 
 //This is where a JWT strategy will be set up
