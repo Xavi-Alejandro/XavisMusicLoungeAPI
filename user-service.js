@@ -41,7 +41,8 @@ module.exports.registerUser = function (userData) {
             reject("Passwords do not match");
         } else {
 
-            bcrypt.hash(userData.password, 10).then(hash => {
+            bcrypt.hash(userData.password, 10)
+            .then(hash => {
 
                 userData.password = hash;
                 

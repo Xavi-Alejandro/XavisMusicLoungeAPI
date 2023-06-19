@@ -64,15 +64,20 @@ app.post('/api/user/register', (req, res) => {
 });
 
 app.post('/api/user/login', (req, res) => {
+    /*In the function below, we check to make sure that the passed user object is valid
+    ie: Password and Password 2 are the same. Once this process resolves, we then generate a 
+    payload that will be used to generate the token. This token, once generated, will be sent back
+    to the client to be stored locally. The server will then check each subsequent request with
+    the passport method */
     userService.checkUser(req.body).then(user => {
-        //generate payload
+        //Sign the payload and generate token
         let payload = {
             _id: user.id,
             userName: user.userName,
             role: user.role
         }
         let token = jwt.sign(payload, jwtOptions.secretOrKey);
-        //return json with token
+        //This is where we return a json object with the token.
         res.json({ "message": "login successful", "token": token });
     }).catch(msg => {
         res.status(422).json({ "message": msg });
